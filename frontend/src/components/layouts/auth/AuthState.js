@@ -16,6 +16,7 @@ import {
 } from "./action";
 
 const AuthState = (props) => {
+   
     const initialState={
         token: localStorage.getItem('token'),
         isAuthenticated: null,
@@ -31,7 +32,7 @@ const AuthState = (props) => {
             AuthToken(localStorage.token)
         }
         try {
-            const res=await axios.get('/api/auth')
+            const res=await axios.post('/api/auth')
             dispatch({
                 type:LOAD_USER,
                 payload:res.data

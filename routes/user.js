@@ -39,6 +39,7 @@ router.post(
       console.log(newuser);
       const payload = {
         id: newuser.id,
+        name: newuser.name
       };
       console.log(payload);
       jwt.sign(
