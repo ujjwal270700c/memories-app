@@ -8,14 +8,32 @@ import useStyles from './allpoststyle';
 
 const AllPost = () => {
     const postContext = useContext(PostContext);
-    const {posts,GetPost} =postContext;
     const classes = useStyles();
-  
+    const {posts,GetPost,filtered} =postContext;
     useEffect(()=>{
-        GetPost();
-      },[]);
+      GetPost();
+    },[]);
+    console.log(posts);
+    if(posts.length===0 || !posts.length ){
+      return  <CircularProgress />
+    }
+    
+  
+   
     return (
-        !posts.length ? <CircularProgress /> : (
+      <>
+      <Grid className={classes.container} container alignItems="stretch" spacing={3}>
+      {filtered !==null ? filtered.map((post) => (
+        <Grid key={post._id} item xs={12} sm={6} md={6}>
+          <PostItem post={post}  />
+        </Grid>
+      )):posts.map((post) => (
+        <Grid key={post._id} item xs={12} sm={6} md={6}>
+          <PostItem post={post}  />
+        </Grid>
+      )) }
+       </Grid>
+        {/* !posts.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>
               {posts.map((post) => (
                 <Grid key={post._id} item xs={12} sm={6} md={6}>
@@ -23,7 +41,8 @@ const AllPost = () => {
                 </Grid>
               ))}
             </Grid>
-        )
+        ) */}
+        </>
     )
 }
 

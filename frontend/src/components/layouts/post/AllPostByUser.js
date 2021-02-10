@@ -20,7 +20,7 @@ const AllPostByUser = (props) => {
   }
   useEffect(() => {
     GetPostByUser(localStorage.id);
-  }, []);
+  },[]);
   return !posts.length ? (
     <CircularProgress />
   ) : (

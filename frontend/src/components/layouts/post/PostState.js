@@ -11,8 +11,6 @@ import {
   GET_POST,
   FILTER_POST,
   CLEAR_FILTER_POST,
-  SET_ALERT,
-  CLEAR_ALERT,
   GET_POSTBYUSER,
   LIKE,
 } from "../auth/action";
@@ -21,6 +19,7 @@ const PostState = (props) => {
   const initialState = {
     posts: [],
     current: null,
+    filtered:null
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
 
@@ -31,7 +30,7 @@ const PostState = (props) => {
       },
     };
     try {
-      const res = await axios.post("/api/posts", post, config);
+      await axios.post("/api/posts", post, config);
       dispatch({
         type: ADD_POST,
         payload: post,
@@ -111,11 +110,18 @@ const PostState = (props) => {
       console.log(error);
     }
   };
+  const filterPost=(text)=>{
+    dispatch({ type: FILTER_POST, payload: text });
+  }
+  const clearFilter=(text)=>{
+    dispatch({ type: CLEAR_FILTER_POST, payload: text });
+  }
   return (
     <PostContext.Provider
       value={{
         posts: state.posts,
         current: state.current,
+        filtered:state.filtered,
         AddPost,
         GetPost,
         GetPostByUser,
@@ -124,6 +130,8 @@ const PostState = (props) => {
         clearCurrent,
         updatePost,
         likePost,
+        filterPost,
+        clearFilter
       }}
     >
       {props.children}
