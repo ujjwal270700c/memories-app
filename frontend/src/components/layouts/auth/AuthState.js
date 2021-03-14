@@ -32,7 +32,7 @@ const AuthState = (props) => {
             AuthToken(localStorage.token)
         }
         try {
-            const res=await axios.post('/api/auth')
+            const res=await axios.post('https://memoriesappbyujjwal.herokuapp.com/api/auth')
             dispatch({
                 type:LOAD_USER,
                 payload:res.data
@@ -53,7 +53,7 @@ const AuthState = (props) => {
             }
         }
         try {
-            const res=await axios.post('/api/users',formData,config);
+            const res=await axios.post('https://memoriesappbyujjwal.herokuapp.com/api/users',formData,config);
             console.log(res);
             dispatch({
                 type:REGISTER_USER,
@@ -73,7 +73,7 @@ const AuthState = (props) => {
             }
         }
         try {
-            const res=await axios.post('/api/auth',formData,config);
+            const res=await axios.post('https://memoriesappbyujjwal.herokuapp.com/api/auth',formData,config);
             dispatch({
                 type:LOGIN_USER,
                 payload:res.data
