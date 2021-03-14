@@ -1,8 +1,8 @@
 // connecting to database
-
+const config = require("config");
 const mongoose=require('mongoose');
-
-mongoose.connect("mongodb+srv://dbuser:dbuser@cluster0.uaxdw.mongodb.net/capstone?retryWrites=true&w=majority",{
+require('dotenv').config()
+mongoose.connect( process.env.URI,{
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
