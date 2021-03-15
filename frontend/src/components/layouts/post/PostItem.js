@@ -19,7 +19,7 @@ const PostItem = ({ post }) => {
   const { likePost } = postContext;
 
   const classes = useStyles();
-  const Likes = () => {
+  const Likes = ({post}) => {
     if (post&& post.likes.length > 0) {
       return post.likes.find((like) => like === localStorage.id) ? (
         <>
@@ -78,7 +78,7 @@ const PostItem = ({ post }) => {
 
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" onClick={() => likePost(post._id)}>
-          <Likes />
+          <Likes  post={post}/>
         </Button>
 
         <Button size="small" color="primary">
