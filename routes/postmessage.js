@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PostMessage = require('../models/postMessage');
+const Employ=require('../models/employ')
 const auth =require('../middlewares/auth')
 const mongoose=require('mongoose')
 
@@ -8,6 +9,15 @@ const mongoose=require('mongoose')
 router.get("/", async (req, res) => { 
     try {
         const postMessages = await PostMessage.find().sort({createdAt:-1});
+                
+        res.status(200).json(postMessages);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+})
+router.get("/employ", async (req, res) => { 
+    try {
+        const postMessages = await Employ.find().sort({createdAt:-1});
                 
         res.status(200).json(postMessages);
     } catch (error) {
@@ -43,6 +53,27 @@ router.post("/",auth, async (req, res) => {
              })
      
        const data =await newPostMessage.save();
+       console.log(data);
+
+        res.status(201).json(data );
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+});
+router.post("/employ", async (req, res) => {
+
+ 
+
+   
+    try {
+        const post = req.body;
+        console.log(post.selectedFile);
+        const newPostEmploy = new Employ({
+             ...post,
+            
+             })
+     
+       const data =await newPostEmploy.save();
        console.log(data);
 
         res.status(201).json(data );

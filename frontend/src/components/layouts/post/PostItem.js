@@ -20,7 +20,7 @@ const PostItem = ({ post }) => {
 
   const classes = useStyles();
   const Likes = ({post}) => {
-    if (post&& post.likes.length > 0) {
+    if (post.like&& post.likes.length > 0) {
       return post.likes.find((like) => like === localStorage.id) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
